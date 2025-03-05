@@ -1,0 +1,133 @@
+{
+  "test_suites": [
+    {
+      "id": "SEC-SUITE-001",
+      "name": "Security Test Suite",
+      "url": "https://example.com/security-tests",
+      "format": "json",
+      "version": 3,
+      "version_string": "3.0",
+      "is_final": false,
+      "db_id": 4
+    },
+    {
+      "id": "REG-SUITE-001",
+      "name": "Regression Test Suite",
+      "url": "https://example.com/regression-tests",
+      "format": "json",
+      "version": 1,
+      "version_string": "1.0",
+      "is_final": true,
+      "db_id": 5
+    },
+    {
+      "id": "MOBILE-SUITE-001",
+      "name": "Mobile Test Suite",
+      "url": "https://example.com/mobile-tests",
+      "format": "json",
+      "version": 2,
+      "version_string": "2.1",
+      "is_final": false,
+      "db_id": 6
+    }
+  ],
+  "test_cases": [
+    {
+      "case_id": "TC001",
+      "title": "Basic Functionality Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "REG-SUITE-001",
+      "area": "Core",
+      "automatability": "Yes",
+      "description": "Verify core functionality for regression testing",
+      "steps": "1. Execute standard test procedure\n2. Verify results match baseline",
+      "precondition": "Baseline data is available"
+    },
+    {
+      "case_id": "TC002",
+      "title": "Performance Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "REG-SUITE-001",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify performance metrics for regression",
+      "steps": "1. Run performance test suite\n2. Compare with previous results",
+      "precondition": "Performance baseline is established"
+    },
+    {
+      "case_id": "TC003",
+      "title": "Security Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-001",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify security controls are functioning",
+      "steps": "1. Attempt to bypass security controls\n2. Verify proper logging",
+      "precondition": "Security controls are enabled"
+    },
+    {
+      "case_id": "TC005",
+      "title": "Mobile UI Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "MOBILE-SUITE-001",
+      "area": "UI",
+      "automatability": "Yes",
+      "description": "Verify mobile UI responsiveness",
+      "steps": "1. Test on various screen sizes\n2. Verify UI elements adapt correctly",
+      "precondition": "Mobile test devices are available"
+    },
+    {
+      "case_id": "TC006",
+      "title": "Mobile Offline Mode",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "MOBILE-SUITE-001",
+      "area": "Functionality",
+      "automatability": "Yes",
+      "description": "Verify application works in offline mode",
+      "steps": "1. Put device in airplane mode\n2. Verify app functionality\n3. Reconnect and verify sync",
+      "precondition": "App has offline capabilities"
+    }
+  ],
+  "test_case_results": [
+    {
+      "test_case_id": "TC001",
+      "result": "Fail",
+      "comment": "Test failed due to unexpected error",
+      "logs": "Error: Connection refused",
+      "artifacts": "error_screenshot.png"
+    },
+    {
+      "test_case_id": "TC002",
+      "result": "Pass",
+      "comment": "Performance within acceptable range",
+      "logs": "Response time: 120ms",
+      "artifacts": "performance_metrics.csv"
+    },
+    {
+      "test_case_id": "TC003",
+      "result": "Fail",
+      "comment": "Security vulnerability detected",
+      "logs": "XSS vulnerability found in input field",
+      "artifacts": "security_scan.log"
+    },
+    {
+      "test_case_id": "TC004",
+      "result": "Skip",
+      "comment": "Test skipped due to environment issues",
+      "logs": "Environment not properly configured",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "TC005",
+      "result": "Pass",
+      "comment": "All checks passed successfully",
+      "logs": "All 15 assertions passed",
+      "artifacts": "validation_report.pdf"
+    }
+  ]
+}

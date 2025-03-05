@@ -1,0 +1,121 @@
+{
+  "test_suites": [
+    {
+      "id": "UI-SUITE-001",
+      "name": "UI Test Suite",
+      "url": "https://example.com/ui-tests",
+      "format": "json",
+      "version": 1,
+      "version_string": "1.0",
+      "is_final": false,
+      "db_id": 1
+    },
+    {
+      "id": "PERF-SUITE-001",
+      "name": "Performance Test Suite",
+      "url": "https://example.com/performance-tests",
+      "format": "json",
+      "version": 2,
+      "version_string": "2.0",
+      "is_final": true,
+      "db_id": 2
+    },
+    {
+      "id": "API-SUITE-001",
+      "name": "API Test Suite",
+      "url": "https://example.com/api-tests",
+      "format": "json",
+      "version": 1,
+      "version_string": "1.0",
+      "is_final": false,
+      "db_id": 3
+    }
+  ],
+  "test_cases": [
+    {
+      "case_id": "TC001",
+      "title": "Basic Functionality Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-001",
+      "area": "Core",
+      "automatability": "Yes",
+      "description": "Verify basic UI functionality works as expected",
+      "steps": "1. Open application\n2. Navigate to main screen\n3. Click on all menu items",
+      "precondition": "Application is installed and running"
+    },
+    {
+      "case_id": "TC002",
+      "title": "Performance Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-001",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify application performance under load",
+      "steps": "1. Generate 1000 test records\n2. Measure response time",
+      "precondition": "Test environment is properly configured"
+    },
+    {
+      "case_id": "TC003",
+      "title": "Security Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-001",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify application security features",
+      "steps": "1. Attempt to access protected resources\n2. Verify proper authentication",
+      "precondition": "User accounts are configured"
+    },
+    {
+      "case_id": "TC004",
+      "title": "API Authentication Test",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-001",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify API authentication works correctly",
+      "steps": "1. Attempt API call without token\n2. Attempt with invalid token\n3. Attempt with valid token",
+      "precondition": "API server is running"
+    }
+  ],
+  "test_case_results": [
+    {
+      "test_case_id": "TC001",
+      "result": "Pass",
+      "comment": "Test passed successfully",
+      "logs": "No errors detected",
+      "artifacts": "screenshot.png"
+    },
+    {
+      "test_case_id": "TC002",
+      "result": "Fail",
+      "comment": "Test failed due to timeout",
+      "logs": "Error: Connection timeout after 30s",
+      "artifacts": "error_log.txt"
+    },
+    {
+      "test_case_id": "TC003",
+      "result": "Pass",
+      "comment": "All assertions passed",
+      "logs": "Test completed in 2.3s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "TC004",
+      "result": "Pass",
+      "comment": "Feature working as expected",
+      "logs": "",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "TC005",
+      "result": "Fail",
+      "comment": "Unexpected behavior in edge case",
+      "logs": "AssertionError: Expected 200 but got 404",
+      "artifacts": "debug_info.log"
+    }
+  ]
+}

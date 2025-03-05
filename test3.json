@@ -1,0 +1,1008 @@
+{
+  "test_suites": [
+    {
+      "id": "UI-SUITE-002",
+      "name": "Enhanced UI Test Suite",
+      "url": "https://example.com/enhanced-ui-tests",
+      "format": "json",
+      "version": 2,
+      "version_string": "2.0",
+      "is_final": false,
+      "db_id": 7
+    },
+    {
+      "id": "API-SUITE-002",
+      "name": "REST API Test Suite",
+      "url": "https://example.com/rest-api-tests",
+      "format": "json",
+      "version": 1,
+      "version_string": "1.0",
+      "is_final": false,
+      "db_id": 8
+    },
+    {
+      "id": "PERF-SUITE-002",
+      "name": "Load Testing Suite",
+      "url": "https://example.com/load-tests",
+      "format": "json",
+      "version": 1,
+      "version_string": "1.0",
+      "is_final": false,
+      "db_id": 9
+    },
+    {
+      "id": "SEC-SUITE-002",
+      "name": "Penetration Testing Suite",
+      "url": "https://example.com/pen-tests",
+      "format": "json",
+      "version": 1,
+      "version_string": "1.0",
+      "is_final": false,
+      "db_id": 10
+    },
+    {
+      "id": "COMP-SUITE-001",
+      "name": "Compatibility Test Suite",
+      "url": "https://example.com/compatibility-tests",
+      "format": "json",
+      "version": 1,
+      "version_string": "1.0",
+      "is_final": false,
+      "db_id": 11
+    }
+  ],
+  "test_cases": [
+    {
+      "case_id": "UI-TC001",
+      "title": "Login Form Validation",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "Authentication",
+      "automatability": "Yes",
+      "description": "Verify login form validation works correctly",
+      "steps": "1. Enter invalid email format\n2. Verify error message\n3. Enter valid email but invalid password\n4. Verify error message",
+      "precondition": "User account exists in the system"
+    },
+    {
+      "case_id": "UI-TC002",
+      "title": "Navigation Menu Functionality",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "Navigation",
+      "automatability": "Yes",
+      "description": "Verify all navigation menu items work correctly",
+      "steps": "1. Click each menu item\n2. Verify correct page loads",
+      "precondition": "User is logged in"
+    },
+    {
+      "case_id": "UI-TC003",
+      "title": "Responsive Design",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "UI",
+      "automatability": "Yes",
+      "description": "Verify UI is responsive on different screen sizes",
+      "steps": "1. Resize browser window\n2. Verify UI adapts correctly",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "UI-TC004",
+      "title": "Form Submission",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "Forms",
+      "automatability": "Yes",
+      "description": "Verify form submission works correctly",
+      "steps": "1. Fill out form\n2. Submit form\n3. Verify success message",
+      "precondition": "User is logged in"
+    },
+    {
+      "case_id": "UI-TC005",
+      "title": "Error Handling",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "Error Handling",
+      "automatability": "Yes",
+      "description": "Verify error handling works correctly",
+      "steps": "1. Trigger an error\n2. Verify error message is displayed",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "UI-TC006",
+      "title": "Pagination",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "UI",
+      "automatability": "Yes",
+      "description": "Verify pagination works correctly",
+      "steps": "1. Navigate to a page with pagination\n2. Click next page\n3. Verify page changes",
+      "precondition": "Data exists for multiple pages"
+    },
+    {
+      "case_id": "UI-TC007",
+      "title": "Sorting",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "UI",
+      "automatability": "Yes",
+      "description": "Verify sorting works correctly",
+      "steps": "1. Click column header to sort\n2. Verify data is sorted correctly",
+      "precondition": "Data exists in the table"
+    },
+    {
+      "case_id": "UI-TC008",
+      "title": "Filtering",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "UI",
+      "automatability": "Yes",
+      "description": "Verify filtering works correctly",
+      "steps": "1. Enter filter criteria\n2. Verify filtered results",
+      "precondition": "Data exists in the table"
+    },
+    {
+      "case_id": "UI-TC009",
+      "title": "Dark Mode Toggle",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "UI",
+      "automatability": "Yes",
+      "description": "Verify dark mode toggle works correctly",
+      "steps": "1. Toggle dark mode\n2. Verify UI changes to dark mode",
+      "precondition": "Application supports dark mode"
+    },
+    {
+      "case_id": "UI-TC010",
+      "title": "Accessibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "UI-SUITE-002",
+      "area": "Accessibility",
+      "automatability": "Yes",
+      "description": "Verify application meets accessibility standards",
+      "steps": "1. Run accessibility audit\n2. Verify no critical issues",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "API-TC001",
+      "title": "GET Endpoint",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "API",
+      "automatability": "Yes",
+      "description": "Verify GET endpoint returns correct data",
+      "steps": "1. Send GET request\n2. Verify response status and data",
+      "precondition": "API is running"
+    },
+    {
+      "case_id": "API-TC002",
+      "title": "POST Endpoint",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "API",
+      "automatability": "Yes",
+      "description": "Verify POST endpoint creates resource",
+      "steps": "1. Send POST request\n2. Verify resource is created",
+      "precondition": "API is running"
+    },
+    {
+      "case_id": "API-TC003",
+      "title": "PUT Endpoint",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "API",
+      "automatability": "Yes",
+      "description": "Verify PUT endpoint updates resource",
+      "steps": "1. Send PUT request\n2. Verify resource is updated",
+      "precondition": "Resource exists"
+    },
+    {
+      "case_id": "API-TC004",
+      "title": "DELETE Endpoint",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "API",
+      "automatability": "Yes",
+      "description": "Verify DELETE endpoint removes resource",
+      "steps": "1. Send DELETE request\n2. Verify resource is removed",
+      "precondition": "Resource exists"
+    },
+    {
+      "case_id": "API-TC005",
+      "title": "Authentication",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify API authentication works correctly",
+      "steps": "1. Send request without token\n2. Verify 401 response\n3. Send request with token\n4. Verify 200 response",
+      "precondition": "API requires authentication"
+    },
+    {
+      "case_id": "API-TC006",
+      "title": "Rate Limiting",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify API rate limiting works correctly",
+      "steps": "1. Send multiple requests quickly\n2. Verify rate limit response",
+      "precondition": "API has rate limiting enabled"
+    },
+    {
+      "case_id": "API-TC007",
+      "title": "Error Handling",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "Error Handling",
+      "automatability": "Yes",
+      "description": "Verify API error handling works correctly",
+      "steps": "1. Send invalid request\n2. Verify error response format",
+      "precondition": "API is running"
+    },
+    {
+      "case_id": "API-TC008",
+      "title": "Pagination",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "API",
+      "automatability": "Yes",
+      "description": "Verify API pagination works correctly",
+      "steps": "1. Send request with pagination parameters\n2. Verify paginated response",
+      "precondition": "Data exists for multiple pages"
+    },
+    {
+      "case_id": "API-TC009",
+      "title": "Filtering",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "API",
+      "automatability": "Yes",
+      "description": "Verify API filtering works correctly",
+      "steps": "1. Send request with filter parameters\n2. Verify filtered response",
+      "precondition": "Data exists for filtering"
+    },
+    {
+      "case_id": "API-TC010",
+      "title": "Sorting",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "API-SUITE-002",
+      "area": "API",
+      "automatability": "Yes",
+      "description": "Verify API sorting works correctly",
+      "steps": "1. Send request with sort parameters\n2. Verify sorted response",
+      "precondition": "Data exists for sorting"
+    },
+    {
+      "case_id": "PERF-TC001",
+      "title": "Response Time",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify API response time is within acceptable limits",
+      "steps": "1. Send request\n2. Measure response time\n3. Verify within limits",
+      "precondition": "API is running"
+    },
+    {
+      "case_id": "PERF-TC002",
+      "title": "Load Testing",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify system handles high load",
+      "steps": "1. Generate high load\n2. Measure response times\n3. Verify within limits",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "PERF-TC003",
+      "title": "Stress Testing",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify system behavior under extreme load",
+      "steps": "1. Generate extreme load\n2. Verify system behavior",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "PERF-TC004",
+      "title": "Endurance Testing",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify system performance over time",
+      "steps": "1. Run system under load for extended period\n2. Monitor performance",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "PERF-TC005",
+      "title": "Scalability Testing",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify system scales with increased load",
+      "steps": "1. Gradually increase load\n2. Monitor system resources",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "PERF-TC006",
+      "title": "Database Performance",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify database performance under load",
+      "steps": "1. Generate database queries\n2. Measure query times",
+      "precondition": "Database is running"
+    },
+    {
+      "case_id": "PERF-TC007",
+      "title": "Memory Usage",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify memory usage is within acceptable limits",
+      "steps": "1. Run system under load\n2. Monitor memory usage",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "PERF-TC008",
+      "title": "CPU Usage",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify CPU usage is within acceptable limits",
+      "steps": "1. Run system under load\n2. Monitor CPU usage",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "PERF-TC009",
+      "title": "Network Performance",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify network performance under load",
+      "steps": "1. Generate network traffic\n2. Measure network metrics",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "PERF-TC010",
+      "title": "Cache Performance",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "PERF-SUITE-002",
+      "area": "Performance",
+      "automatability": "Yes",
+      "description": "Verify cache performance",
+      "steps": "1. Measure cache hit rate\n2. Verify within acceptable limits",
+      "precondition": "System has caching enabled"
+    },
+    {
+      "case_id": "SEC-TC001",
+      "title": "SQL Injection",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify system is protected against SQL injection",
+      "steps": "1. Attempt SQL injection attacks\n2. Verify attacks are blocked",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "SEC-TC002",
+      "title": "XSS Protection",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify system is protected against XSS attacks",
+      "steps": "1. Attempt XSS attacks\n2. Verify attacks are blocked",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "SEC-TC003",
+      "title": "CSRF Protection",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify system is protected against CSRF attacks",
+      "steps": "1. Attempt CSRF attacks\n2. Verify attacks are blocked",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "SEC-TC004",
+      "title": "Authentication Security",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify authentication security measures",
+      "steps": "1. Test password policies\n2. Test account lockout\n3. Test session timeout",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "SEC-TC005",
+      "title": "Authorization",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify authorization controls work correctly",
+      "steps": "1. Test access controls\n2. Verify proper authorization",
+      "precondition": "System has multiple user roles"
+    },
+    {
+      "case_id": "SEC-TC006",
+      "title": "Data Encryption",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify sensitive data is encrypted",
+      "steps": "1. Check database encryption\n2. Check data in transit encryption",
+      "precondition": "System handles sensitive data"
+    },
+    {
+      "case_id": "SEC-TC007",
+      "title": "File Upload Security",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify file upload security measures",
+      "steps": "1. Attempt to upload malicious files\n2. Verify they are blocked",
+      "precondition": "System allows file uploads"
+    },
+    {
+      "case_id": "SEC-TC008",
+      "title": "Error Handling Security",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify error handling doesn't reveal sensitive information",
+      "steps": "1. Trigger errors\n2. Verify error messages don't contain sensitive info",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "SEC-TC009",
+      "title": "Security Headers",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify security headers are properly set",
+      "steps": "1. Check HTTP response headers\n2. Verify security headers are present",
+      "precondition": "System is running"
+    },
+    {
+      "case_id": "SEC-TC010",
+      "title": "Dependency Security",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "SEC-SUITE-002",
+      "area": "Security",
+      "automatability": "Yes",
+      "description": "Verify dependencies don't have known vulnerabilities",
+      "steps": "1. Run dependency security scan\n2. Verify no critical vulnerabilities",
+      "precondition": "System dependencies are available"
+    },
+    {
+      "case_id": "COMP-TC001",
+      "title": "Browser Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works in different browsers",
+      "steps": "1. Test in Chrome, Firefox, Safari, Edge\n2. Verify functionality works",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "COMP-TC002",
+      "title": "Mobile Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works on mobile devices",
+      "steps": "1. Test on iOS and Android\n2. Verify functionality works",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "COMP-TC003",
+      "title": "OS Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works on different operating systems",
+      "steps": "1. Test on Windows, macOS, Linux\n2. Verify functionality works",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "COMP-TC004",
+      "title": "Screen Resolution Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works at different screen resolutions",
+      "steps": "1. Test at different resolutions\n2. Verify UI adapts correctly",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "COMP-TC005",
+      "title": "Database Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works with different database versions",
+      "steps": "1. Test with different database versions\n2. Verify functionality works",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "COMP-TC006",
+      "title": "Third-Party Integration Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works with third-party integrations",
+      "steps": "1. Test integration with third-party services\n2. Verify functionality works",
+      "precondition": "Third-party services are available"
+    },
+    {
+      "case_id": "COMP-TC007",
+      "title": "Accessibility Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works with accessibility tools",
+      "steps": "1. Test with screen readers\n2. Test with keyboard navigation\n3. Verify functionality works",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "COMP-TC008",
+      "title": "Network Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works under different network conditions",
+      "steps": "1. Test with slow network\n2. Test with intermittent network\n3. Verify functionality works",
+      "precondition": "Application is running"
+    },
+    {
+      "case_id": "COMP-TC009",
+      "title": "Internationalization Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works with different languages and locales",
+      "steps": "1. Test with different languages\n2. Test with different date/number formats\n3. Verify functionality works",
+      "precondition": "Application supports internationalization"
+    },
+    {
+      "case_id": "COMP-TC010",
+      "title": "Upgrade Compatibility",
+      "version": 1,
+      "version_string": "1.0",
+      "test_suite_id": "COMP-SUITE-001",
+      "area": "Compatibility",
+      "automatability": "Yes",
+      "description": "Verify application works after upgrade",
+      "steps": "1. Upgrade from previous version\n2. Verify functionality works",
+      "precondition": "Previous version is installed"
+    }
+  ],
+  "test_case_results": [
+    {
+      "test_case_id": "UI-TC001",
+      "result": "Pass",
+      "comment": "All validation messages displayed correctly",
+      "logs": "Test completed in 1.2s",
+      "artifacts": "validation_screenshots.zip"
+    },
+    {
+      "test_case_id": "UI-TC002",
+      "result": "Pass",
+      "comment": "All menu items working as expected",
+      "logs": "Test completed in 2.5s",
+      "artifacts": "navigation_flow.mp4"
+    },
+    {
+      "test_case_id": "UI-TC003",
+      "result": "Fail",
+      "comment": "Layout breaks at 320px width",
+      "logs": "Error: Overflow detected in sidebar component",
+      "artifacts": "responsive_issues.png"
+    },
+    {
+      "test_case_id": "UI-TC004",
+      "result": "Pass",
+      "comment": "Form submission working correctly",
+      "logs": "Test completed in 1.8s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "UI-TC005",
+      "result": "Pass",
+      "comment": "Error messages displayed correctly",
+      "logs": "Test completed in 1.5s",
+      "artifacts": "error_handling.png"
+    },
+    {
+      "test_case_id": "UI-TC006",
+      "result": "Pass",
+      "comment": "Pagination working correctly",
+      "logs": "Test completed in 2.1s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "UI-TC007",
+      "result": "Fail",
+      "comment": "Sorting not working for date columns",
+      "logs": "Error: Invalid date comparison",
+      "artifacts": "sorting_issue.mp4"
+    },
+    {
+      "test_case_id": "UI-TC008",
+      "result": "Pass",
+      "comment": "Filtering working correctly",
+      "logs": "Test completed in 1.9s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "UI-TC009",
+      "result": "Pass",
+      "comment": "Dark mode toggle working correctly",
+      "logs": "Test completed in 1.3s",
+      "artifacts": "dark_mode.png"
+    },
+    {
+      "test_case_id": "UI-TC010",
+      "result": "Fail",
+      "comment": "Multiple accessibility issues found",
+      "logs": "Error: Missing alt text, low contrast, no keyboard focus indicators",
+      "artifacts": "accessibility_report.pdf"
+    },
+    {
+      "test_case_id": "API-TC001",
+      "result": "Pass",
+      "comment": "GET endpoint returning correct data",
+      "logs": "Response time: 120ms",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC002",
+      "result": "Pass",
+      "comment": "POST endpoint creating resources correctly",
+      "logs": "Response time: 150ms",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC003",
+      "result": "Pass",
+      "comment": "PUT endpoint updating resources correctly",
+      "logs": "Response time: 135ms",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC004",
+      "result": "Pass",
+      "comment": "DELETE endpoint removing resources correctly",
+      "logs": "Response time: 110ms",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC005",
+      "result": "Pass",
+      "comment": "Authentication working correctly",
+      "logs": "Test completed in 1.7s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC006",
+      "result": "Fail",
+      "comment": "Rate limiting not enforced correctly",
+      "logs": "Error: Able to exceed rate limit",
+      "artifacts": "rate_limit_test.log"
+    },
+    {
+      "test_case_id": "API-TC007",
+      "result": "Pass",
+      "comment": "Error responses formatted correctly",
+      "logs": "Test completed in 1.5s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC008",
+      "result": "Pass",
+      "comment": "Pagination working correctly",
+      "logs": "Test completed in 1.8s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC009",
+      "result": "Pass",
+      "comment": "Filtering working correctly",
+      "logs": "Test completed in 1.6s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "API-TC010",
+      "result": "Pass",
+      "comment": "Sorting working correctly",
+      "logs": "Test completed in 1.7s",
+      "artifacts": ""
+    },
+    {
+      "test_case_id": "PERF-TC001",
+      "result": "Pass",
+      "comment": "Response times within acceptable limits",
+      "logs": "Average response time: 125ms",
+      "artifacts": "response_time_metrics.csv"
+    },
+    {
+      "test_case_id": "PERF-TC002",
+      "result": "Fail",
+      "comment": "System degraded under high load",
+      "logs": "Error: Response times exceeded 2s under load",
+      "artifacts": "load_test_results.pdf"
+    },
+    {
+      "test_case_id": "PERF-TC003",
+      "result": "Fail",
+      "comment": "System crashed under extreme load",
+      "logs": "Error: Service unavailable after 5000 concurrent users",
+      "artifacts": "stress_test_results.pdf"
+    },
+    {
+      "test_case_id": "PERF-TC004",
+      "result": "Pass",
+      "comment": "System stable over 24-hour test",
+      "logs": "No degradation observed",
+      "artifacts": "endurance_test_results.csv"
+    },
+    {
+      "test_case_id": "PERF-TC005",
+      "result": "Pass",
+      "comment": "System scaled correctly with increased load",
+      "logs": "Auto-scaling triggered as expected",
+      "artifacts": "scalability_metrics.csv"
+    },
+    {
+      "test_case_id": "PERF-TC006",
+      "result": "Fail",
+      "comment": "Database queries slowed under load",
+      "logs": "Error: Query times exceeded 500ms",
+      "artifacts": "database_performance.log"
+    },
+    {
+      "test_case_id": "PERF-TC007",
+      "result": "Pass",
+      "comment": "Memory usage within acceptable limits",
+      "logs": "Peak memory usage: 2.3GB",
+      "artifacts": "memory_profile.png"
+    },
+    {
+      "test_case_id": "PERF-TC008",
+      "result": "Pass",
+      "comment": "CPU usage within acceptable limits",
+      "logs": "Peak CPU usage: 65%",
+      "artifacts": "cpu_profile.png"
+    },
+    {
+      "test_case_id": "PERF-TC009",
+      "result": "Pass",
+      "comment": "Network performance acceptable",
+      "logs": "Network throughput: 120Mbps",
+      "artifacts": "network_metrics.csv"
+    },
+    {
+      "test_case_id": "PERF-TC010",
+      "result": "Pass",
+      "comment": "Cache performance acceptable",
+      "logs": "Cache hit rate: 87%",
+      "artifacts": "cache_metrics.csv"
+    },
+    {
+      "test_case_id": "SEC-TC001",
+      "result": "Pass",
+      "comment": "SQL injection attacks blocked",
+      "logs": "All 15 attack vectors blocked",
+      "artifacts": "sql_injection_test.log"
+    },
+    {
+      "test_case_id": "SEC-TC002",
+      "result": "Fail",
+      "comment": "XSS vulnerability found in search field",
+      "logs": "Error: Reflected XSS attack successful",
+      "artifacts": "xss_vulnerability.mp4"
+    },
+    {
+      "test_case_id": "SEC-TC003",
+      "result": "Pass",
+      "comment": "CSRF attacks blocked",
+      "logs": "All 10 attack vectors blocked",
+      "artifacts": "csrf_test.log"
+    },
+    {
+      "test_case_id": "SEC-TC004",
+      "result": "Pass",
+      "comment": "Authentication security measures working",
+      "logs": "Password policies and account lockout functioning",
+      "artifacts": "auth_security_test.log"
+    },
+    {
+      "test_case_id": "SEC-TC005",
+      "result": "Pass",
+      "comment": "Authorization controls working",
+      "logs": "All role-based access controls functioning",
+      "artifacts": "authorization_test.log"
+    },
+    {
+      "test_case_id": "SEC-TC006",
+      "result": "Pass",
+      "comment": "Data encryption implemented correctly",
+      "logs": "All sensitive data encrypted at rest and in transit",
+      "artifacts": "encryption_verification.pdf"
+    },
+    {
+      "test_case_id": "SEC-TC007",
+      "result": "Pass",
+      "comment": "File upload security measures working",
+      "logs": "All malicious file uploads blocked",
+      "artifacts": "upload_security_test.log"
+    },
+    {
+      "test_case_id": "SEC-TC008",
+      "result": "Pass",
+      "comment": "Error handling secure",
+      "logs": "No sensitive information in error messages",
+      "artifacts": "error_handling_test.log"
+    },
+    {
+      "test_case_id": "SEC-TC009",
+      "result": "Fail",
+      "comment": "Missing security headers",
+      "logs": "Error: Missing Content-Security-Policy header",
+      "artifacts": "security_headers_report.pdf"
+    },
+    {
+      "test_case_id": "SEC-TC010",
+      "result": "Fail",
+      "comment": "Vulnerable dependencies found",
+      "logs": "Error: 3 critical vulnerabilities in dependencies",
+      "artifacts": "dependency_scan_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC001",
+      "result": "Pass",
+      "comment": "Application works in all major browsers",
+      "logs": "Tested in Chrome, Firefox, Safari, Edge",
+      "artifacts": "browser_compatibility_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC002",
+      "result": "Fail",
+      "comment": "Issues on iOS Safari",
+      "logs": "Error: Form submission not working on iOS Safari",
+      "artifacts": "ios_safari_issue.mp4"
+    },
+    {
+      "test_case_id": "COMP-TC003",
+      "result": "Pass",
+      "comment": "Application works on all tested operating systems",
+      "logs": "Tested on Windows 10, macOS Monterey, Ubuntu 20.04",
+      "artifacts": "os_compatibility_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC004",
+      "result": "Pass",
+      "comment": "UI adapts correctly to different resolutions",
+      "logs": "Tested at 1080p, 1440p, 4K, and mobile resolutions",
+      "artifacts": "resolution_compatibility.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC005",
+      "result": "Pass",
+      "comment": "Application works with different database versions",
+      "logs": "Tested with PostgreSQL 12, 13, and 14",
+      "artifacts": "database_compatibility_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC006",
+      "result": "Pass",
+      "comment": "Third-party integrations working",
+      "logs": "All integrations functioning correctly",
+      "artifacts": "integration_test_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC007",
+      "result": "Fail",
+      "comment": "Accessibility issues with screen readers",
+      "logs": "Error: ARIA attributes missing on interactive elements",
+      "artifacts": "accessibility_compatibility_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC008",
+      "result": "Pass",
+      "comment": "Application handles different network conditions",
+      "logs": "Tested with throttled and intermittent connections",
+      "artifacts": "network_compatibility_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC009",
+      "result": "Pass",
+      "comment": "Internationalization working correctly",
+      "logs": "Tested with English, Spanish, Japanese, and RTL languages",
+      "artifacts": "i18n_compatibility_report.pdf"
+    },
+    {
+      "test_case_id": "COMP-TC010",
+      "result": "Pass",
+      "comment": "Upgrade process successful",
+      "logs": "Upgraded from v1.0 to v2.0 without issues",
+      "artifacts": "upgrade_compatibility_report.pdf"
+    }
+  ]
+}
