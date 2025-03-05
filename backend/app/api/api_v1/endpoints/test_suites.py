@@ -1,58 +1,58 @@
-from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlmodel import Session, select
+import logging
+from typing import List, Optional
+from fastapi import APIRouter, Depends, HTTPException, status, Query
+from sqlmodel import Session, select, func
+from sqlalchemy.orm import selectinload
 
-from app.db.init_db import get_session
+from app.db.session import get_session
 from app.models.test_suite import TestSuite, TestSuiteCreate, TestSuiteRead, TestSuiteUpdate
+from app.core.cache import cache_response, invalidate_cache
+from .pagination import Page, PageParams
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[TestSuiteRead])
-def read_test_suites(
-    skip: int = 0, 
-    limit: int = 100,
-    raw: bool = False,
+@router.get("/", response_model=Page[TestSuiteRead])
+@cache_response(ttl=300)  # Cache for 5 minutes
+async def read_test_suites(
+    pagination: PageParams = Depends(),
+    name: Optional[str] = None,
+    format: Optional[str] = None,
+    version: Optional[int] = None,
+    is_final: Optional[bool] = None,
     session: Session = Depends(get_session)
-):
+) -> Page[TestSuiteRead]:
+    """
+    Get test suites with pagination and filtering.
+    Cached for 5 minutes to improve performance.
+    """
     try:
-        # First try with a standard SQLModel query
-        statement = select(TestSuite)
-        test_suites = session.exec(statement.offset(skip).limit(limit)).all()
+        # Build query with filters
+        query = select(TestSuite)
+        if name:
+            query = query.where(TestSuite.name.ilike(f"%{name}%"))
+        if format:
+            query = query.where(TestSuite.format == format)
+        if version is not None:
+            query = query.where(TestSuite.version == version)
+        if is_final is not None:
+            query = query.where(TestSuite.is_final == is_final)
+
+        # Get total count for pagination
+        count_query = select(func.count()).select_from(query)
+        total = session.exec(count_query).one()
+
+        # Apply pagination
+        query = query.offset(pagination.offset).limit(pagination.size)
         
-        if test_suites:
-            print(f"Found {len(test_suites)} test suites with SQLModel query")
-            return test_suites
+        # Execute query
+        test_suites = session.exec(query).all()
         
-        # If no results, try with a direct SQL query
-        print("No test suites found with SQLModel query, trying direct SQL query")
-        result = session.execute("SELECT * FROM testsuite LIMIT 100")
-        rows = result.fetchall()
-        print(f"Direct query found {len(rows)} rows in testsuite table")
-        
-        # Convert rows to TestSuite objects or dictionaries
-        test_suites = []
-        for row in rows:
-            # Convert row to dict
-            row_dict = {column: value for column, value in zip(result.keys(), row)}
-            print(f"Row data: {row_dict}")
-            
-            if raw:
-                # For raw mode, just return the dictionary
-                test_suites.append(row_dict)
-            else:
-                # Create TestSuite object
-                try:
-                    test_suite = TestSuite(**row_dict)
-                    test_suites.append(test_suite)
-                except Exception as obj_error:
-                    print(f"Error creating TestSuite object: {obj_error}")
-                    # Fall back to returning the raw dict if object creation fails
-                    test_suites.append(row_dict)
-        
-        # If still no test suites, create a default one
-        if not test_suites:
-            print("No test suites found, creating a default test suite")
+        # If no test suites exist, create a default one
+        if not test_suites and total == 0:
             default_suite = TestSuite(
                 id="DEFAULT",
                 name="Default Test Suite",
@@ -65,119 +65,206 @@ def read_test_suites(
             session.commit()
             session.refresh(default_suite)
             test_suites = [default_suite]
+            total = 1
         
-        return test_suites
+        # Return paginated response
+        return Page.create(
+            items=test_suites,
+            total=total,
+            params=pagination
+        )
     except Exception as e:
-        print(f"Error fetching test suites: {str(e)}")
-        import traceback
-        traceback.print_exc()
-        return []
+        logger.error(f"Error fetching test suites: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error while fetching test suites"
+        )
 
 
 @router.post("/", response_model=TestSuiteRead, status_code=status.HTTP_201_CREATED)
-def create_test_suite(
+async def create_test_suite(
     test_suite: TestSuiteCreate, 
     session: Session = Depends(get_session)
 ):
+    """Create a new test suite and invalidate the cache"""
     try:
         db_test_suite = TestSuite.from_orm(test_suite)
         session.add(db_test_suite)
         session.commit()
         session.refresh(db_test_suite)
+        
+        # Invalidate the test suites cache
+        invalidate_cache("read_test_suites")
+        
         return db_test_suite
     except Exception as e:
+        logger.error(f"Error creating test suite: {e}", exc_info=True)
         raise HTTPException(
             status_code=400,
-            detail=f"Error creating test suite: {str(e)}"
+            detail="Error creating test suite"
         )
 
 
 @router.get("/{test_suite_id}", response_model=TestSuiteRead)
-def read_test_suite(
+@cache_response(ttl=300)  # Cache for 5 minutes
+async def read_test_suite(
     test_suite_id: str, 
     session: Session = Depends(get_session)
 ):
+    """Get a single test suite by ID with caching"""
     try:
         # First try to get by string ID
-        test_suite = session.exec(select(TestSuite).where(TestSuite.id == test_suite_id)).first()
+        test_suite = session.exec(
+            select(TestSuite)
+            .where(TestSuite.id == test_suite_id)
+            .options(selectinload('*'))  # Eager load relationships
+        ).first()
         
         if not test_suite:
             # Try to get by database ID if the string ID failed
             try:
                 db_id = int(test_suite_id)
-                test_suite = session.exec(select(TestSuite).where(TestSuite.db_id == db_id)).first()
+                test_suite = session.exec(
+                    select(TestSuite)
+                    .where(TestSuite.db_id == db_id)
+                    .options(selectinload('*'))
+                ).first()
             except ValueError:
                 pass
         
         if not test_suite:
-            # Try a direct SQL query as a last resort
-            result = session.execute(f"SELECT * FROM testsuite WHERE id = '{test_suite_id}'").first()
-            if result:
-                # Convert row to dict
-                row_dict = {column: value for column, value in zip(result.keys(), result)}
-                print(f"Found test suite via direct SQL: {row_dict}")
-                
-                # Create TestSuite object from row
-                test_suite = TestSuite(**row_dict)
-        
-        if not test_suite:
-            raise HTTPException(status_code=404, detail="Test suite not found")
+            raise HTTPException(
+                status_code=404,
+                detail="Test suite not found"
+            )
         
         return test_suite
+    except HTTPException:
+        raise
     except Exception as e:
-        print(f"Error in read_test_suite: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error retrieving test suite: {str(e)}")
+        logger.error(f"Error in read_test_suite: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error while retrieving test suite"
+        )
 
 
 @router.patch("/{test_suite_id}", response_model=TestSuiteRead)
-def update_test_suite(
+async def update_test_suite(
     test_suite_id: str,
     test_suite: TestSuiteUpdate,
     session: Session = Depends(get_session)
 ):
-    # First try to get by string ID
-    db_test_suite = session.exec(select(TestSuite).where(TestSuite.id == test_suite_id)).first()
-    
-    if not db_test_suite:
-        # Try to get by database ID if the string ID failed
+    """Update a test suite and invalidate related caches"""
+    try:
+        # First try to get by string ID
+        db_test_suite = session.exec(
+            select(TestSuite)
+            .where(TestSuite.id == test_suite_id)
+            .options(selectinload('*'))  # Eager load relationships
+        ).first()
+        
+        if not db_test_suite:
+            # Try to get by database ID if the string ID failed
+            try:
+                db_id = int(test_suite_id)
+                db_test_suite = session.exec(
+                    select(TestSuite)
+                    .where(TestSuite.db_id == db_id)
+                    .options(selectinload('*'))
+                ).first()
+            except ValueError:
+                pass
+        
+        if not db_test_suite:
+            raise HTTPException(
+                status_code=404,
+                detail="Test suite not found"
+            )
+        
+        # Update fields
+        test_suite_data = test_suite.dict(exclude_unset=True)
+        for key, value in test_suite_data.items():
+            setattr(db_test_suite, key, value)
+        
         try:
-            db_id = int(test_suite_id)
-            db_test_suite = session.exec(select(TestSuite).where(TestSuite.db_id == db_id)).first()
-        except ValueError:
-            pass
-    
-    if not db_test_suite:
-        raise HTTPException(status_code=404, detail="Test suite not found")
-    
-    test_suite_data = test_suite.dict(exclude_unset=True)
-    for key, value in test_suite_data.items():
-        setattr(db_test_suite, key, value)
-    
-    session.add(db_test_suite)
-    session.commit()
-    session.refresh(db_test_suite)
-    return db_test_suite
+            session.add(db_test_suite)
+            session.commit()
+            session.refresh(db_test_suite)
+            
+            # Invalidate caches
+            invalidate_cache("read_test_suites")
+            invalidate_cache(f"read_test_suite_{test_suite_id}")
+            
+            return db_test_suite
+        except Exception as e:
+            session.rollback()
+            logger.error(f"Error updating test suite: {e}", exc_info=True)
+            raise HTTPException(
+                status_code=400,
+                detail="Error updating test suite"
+            )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in update_test_suite: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error while updating test suite"
+        )
 
 
 @router.delete("/{test_suite_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_test_suite(
+async def delete_test_suite(
     test_suite_id: str,
     session: Session = Depends(get_session)
 ):
-    # First try to get by string ID
-    test_suite = session.exec(select(TestSuite).where(TestSuite.id == test_suite_id)).first()
-    
-    if not test_suite:
-        # Try to get by database ID if the string ID failed
+    """Delete a test suite and invalidate related caches"""
+    try:
+        # First try to get by string ID
+        test_suite = session.exec(
+            select(TestSuite)
+            .where(TestSuite.id == test_suite_id)
+        ).first()
+        
+        if not test_suite:
+            # Try to get by database ID if the string ID failed
+            try:
+                db_id = int(test_suite_id)
+                test_suite = session.exec(
+                    select(TestSuite)
+                    .where(TestSuite.db_id == db_id)
+                ).first()
+            except ValueError:
+                pass
+        
+        if not test_suite:
+            raise HTTPException(
+                status_code=404,
+                detail="Test suite not found"
+            )
+        
         try:
-            db_id = int(test_suite_id)
-            test_suite = session.exec(select(TestSuite).where(TestSuite.db_id == db_id)).first()
-        except ValueError:
-            pass
-    
-    if not test_suite:
-        raise HTTPException(status_code=404, detail="Test suite not found")
-    
-    session.delete(test_suite)
-    session.commit()
-    return None
+            session.delete(test_suite)
+            session.commit()
+            
+            # Invalidate caches
+            invalidate_cache("read_test_suites")
+            invalidate_cache(f"read_test_suite_{test_suite_id}")
+            
+            return None
+        except Exception as e:
+            session.rollback()
+            logger.error(f"Error deleting test suite: {e}", exc_info=True)
+            raise HTTPException(
+                status_code=400,
+                detail="Error deleting test suite"
+            )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in delete_test_suite: {e}", exc_info=True)
+        raise HTTPException(
+            status_code=500,
+            detail="Internal server error while deleting test suite"
+        )
