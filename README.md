@@ -152,6 +152,47 @@ The frontend provides a user-friendly interface for:
 - Uploading test results from JSON files
 - Viewing detailed reports and statistics
 
+## Testing
+
+The project includes comprehensive test suites for both the backend API and frontend components.
+
+### API Testing with pytest
+
+The backend API is tested using pytest. Tests verify that endpoints return the expected responses and handle various input scenarios correctly.
+
+To run the API tests:
+```bash
+pytest tests/test_api.py -v
+```
+
+Key API test features:
+- Tests for all major endpoints (GET, POST, PUT, DELETE)
+- Validation of response status codes and data structures
+- Testing of error handling and edge cases
+- Fixtures that provide isolated test environments
+
+### Frontend Testing with Playwright
+
+Frontend tests use Playwright to automate browser interactions and verify UI functionality.
+
+To run the frontend tests:
+```bash
+pytest tests/test_frontend.py -v
+```
+
+Key frontend test features:
+- Tests run in real browser environments (Chromium by default)
+- Page navigation and URL verification
+- Form submission and validation
+- Dynamic content updates
+- Visual element verification
+
+### Test Configuration
+
+Tests are configured in `pytest.ini` and use fixtures defined in `conftest.py` to set up test environments.
+
+The frontend tests automatically start a local test server during test execution, so no manual server setup is required.
+
 ## Using Aider for Development
 
 [Aider](https://github.com/paul-gauthier/aider) is an AI pair programming tool that can help you develop this project further. It uses large language models to understand and modify code based on natural language instructions.
